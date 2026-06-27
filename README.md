@@ -33,7 +33,5 @@ Smart School Management, Unified.
 Everything Your School Needs, In One System.
 Connecting Students, Teachers, and Success.
 
-My favorite combination would be:
-
 EduSync 23
 One Platform. Every School Operation.
