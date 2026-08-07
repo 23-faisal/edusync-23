@@ -4,8 +4,6 @@ import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { CardContent } from "@/components/ui/card";
 import {
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
@@ -178,8 +176,6 @@ const FinanceChart = () => {
               fill="url(#fillIncome)"
               strokeWidth={3}
             />
-
-            <ChartLegend content={<ChartLegendContent />} />
           </AreaChart>
         </ChartContainer>
       </CardContent>

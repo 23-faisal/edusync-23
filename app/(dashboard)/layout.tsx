@@ -6,9 +6,9 @@ import MenuComponent from "@/components/shared/Menu";
 import Navbar from "@/components/dashboard/Navbar";
 
 export const metadata: Metadata = {
-  title: "EduSync One",
+  title: "EduSync 23",
   description:
-    "EduSync One aims to simplify school operations by bringing all academic and administrative activities into one unified platform, improving efficiency, transparency, and communication among administrators, teachers, students, and parents. ",
+    "EduSync 23 aims to simplify school operations by bringing all academic and administrative activities into one unified platform, improving efficiency, transparency, and communication among administrators, teachers, students, and parents. ",
 };
 
 export default function DashboardLayout({
