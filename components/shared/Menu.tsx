@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Book,
   Calendar1,
@@ -17,8 +19,10 @@ import {
   Users,
   Users2,
 } from "lucide-react";
+
 import Link from "next/link";
 import { role } from "@/lib/data";
+import { usePathname } from "next/navigation";
 
 const MenuItems = [
   {
@@ -27,85 +31,85 @@ const MenuItems = [
       {
         icon: Home,
         label: "Home",
-        href: "/",
+        href: "/admin",
         visible: ["admin", "teacher", "parent", "student"],
       },
       {
         icon: GraduationCap,
         label: "Teacher",
-        href: "/teacher",
+        href: "/lists/teacher",
         visible: ["admin", "teacher"],
       },
       {
         icon: Users,
-        label: "Student",
-        href: "/student",
+        label: "Students",
+        href: "/lists/students",
         visible: ["admin", "teacher"],
       },
       {
         icon: Users2,
         label: "Parent",
-        href: "/parent",
+        href: "/lists/parents",
         visible: ["admin", "teacher"],
       },
       {
         icon: Book,
         label: "Subjects",
-        href: "/subjects",
+        href: "/lists/subjects",
         visible: ["admin", "teacher"],
       },
       {
         icon: Presentation,
         label: "Classes",
-        href: "/classes",
+        href: "/lists/classes",
         visible: ["admin", "teacher"],
       },
       {
         icon: Dices,
         label: "Lessons",
-        href: "/lessons",
+        href: "/lists/lessons",
         visible: ["admin", "teacher"],
       },
       {
         icon: ClipboardPen,
         label: "Exams",
-        href: "/exams",
+        href: "/lists/exams",
         visible: ["admin", "teacher", "parent", "student"],
       },
       {
         icon: NotebookPen,
         label: "Assignments",
-        href: "/assignments",
+        href: "/lists/assignments",
         visible: ["admin", "teacher", "parent", "student"],
       },
       {
         icon: CalendarCheck,
         label: "Attendance",
-        href: "/attendance",
+        href: "/lists/attendances",
         visible: ["admin", "teacher", "parent", "student"],
       },
       {
         icon: CalendarRange,
         label: "Events",
-        href: "/Events",
+        href: "/lists/events",
         visible: ["admin", "teacher", "parent", "student"],
       },
       {
         icon: Calendar1,
         label: "Calender",
-        href: "/Calender",
+        href: "/lists/calender",
         visible: ["admin", "teacher", "parent", "student"],
       },
       {
         icon: MessageSquareMore,
         label: "Message",
-        href: "/Message",
+        href: "/lists/message",
         visible: ["admin", "teacher", "parent", "student"],
       },
       {
         icon: Megaphone,
         label: "Announcement",
-        href: "/announcement",
+        href: "/lists/announcements",
         visible: ["admin", "teacher", "parent", "student"],
       },
     ],
@@ -136,28 +140,41 @@ const MenuItems = [
 ];
 
 const MenuComponent = () => {
+  const pathname = usePathname();
+
   return (
     <div className="flex flex-col gap-6">
       {MenuItems.map((i) => (
-        <div key={i.title} className="">
-          <span className="text-sm text-muted-foreground font-semibold hidden lg:block">
+        <div key={i.title}>
+          <span className="hidden text-sm font-semibold text-muted-foreground lg:block">
             {i.title}
           </span>
-          <div className="flex flex-col  lg:gap-2 items-center lg:items-start justify-center lg:justify-start ">
+
+          <div className="flex flex-col items-center justify-center lg:items-start lg:justify-start lg:gap-2">
             {i.items.map((item) => {
-              if (item.visible.includes(role)) {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="flex items-center gap-2 px-2 md:px-4 py-2 hover:bg-blue-200 w-full rounded-md transition ease-in-out duration-100 "
-                  >
-                    <Icon size={18} />
-                    <span className="hidden lg:block">{item.label}</span>
-                  </Link>
-                );
-              }
+              if (!item.visible.includes(role)) return null;
+
+              const Icon = item.icon;
+
+              const isActive = pathname === item.href;
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex w-full items-center justify-center gap-4 rounded-md px-3 py-2
+                    lg:justify-start
+                    ${
+                      isActive
+                        ? "bg-blue-500 text-primary-foreground"
+                        : "text-muted-foreground hover:bg-slate-200 hover:text-accent-foreground"
+                    }
+                  `}
+                >
+                  <Icon size={18} />
+                  <span className="hidden lg:block">{item.label}</span>
+                </Link>
+              );
             })}
           </div>
         </div>
